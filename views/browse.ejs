@@ -1,0 +1,50 @@
+<!-- This will be the browse, main page -->
+<%- include("partials/header.ejs") %>
+
+<main class="container-fluid">
+  <!-- VERY ROUGH form for testing -->
+  <div class="row row-cols-4 g-4">
+    <!-- Function below will check array of names in a set of data, and create a div card for each. Will link to database when able to...
+      !!PROBLEMS WITH CURRENT SOLUTION
+        *This solution makes it difficult to sync up arrays with blank values. Require inputed data to require all fields? -->
+    <%for(i = 0; i< locals.title.length; i++) { var name = title[i]; var info = description[i]%>
+    <div class="col">
+      <a data-bs-toggle="modal" data-bs-target="#<%-name %>">
+        <div class="card">
+          <img src="" alt="example image here" height="100px" width="100px" />
+          <div class="card-body">
+            <h5 class="card-title"><%= name %></h5>
+            <h6 class="card-text"><%= info %></h6>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="<%- name %>" tabindex="-1" aria-labelledby="<%- name %>" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="<%- name %>"><%- name %></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="hstack">
+              <div class="col-6">
+                <img src="" alt="example img here" height="500px" width="500px" />
+              </div>
+              <div class="col-6">
+                <h3><%- info %></h3>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%}%>
+  </div>
+</main>
+
+<%- include("partials/footer.ejs") %>
