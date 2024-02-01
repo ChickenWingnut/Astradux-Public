@@ -1,22 +1,29 @@
 import express from "express";
 import bodyParser from "body-parser";
 import multer from "multer";
+import path from "path";
 
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "public/img");
+  },
+  filename: (req, file, callback) => {
+    console.log(file);
+    callback(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
 const app = express();
 const port = 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-// Constructor for adding a part(may need to change for database)
-function item(name, description) {
-  this.name = name;
-  this.description = description;
-}
 
+// **** This data point loads up the data for each card
 let data = {
-  title: ["ball", "bananna"],
-  description: ["cool ball", "cool bananna"],
+  name: [],
+  description: [],
+  image: [],
 };
 
 app.get("/", (req, res) => {
@@ -28,11 +35,14 @@ app.get("/browse", (req, res) => {
   res.locals = data;
   res.render("browse.ejs");
 });
-app.post("/additem", (req, res) => {
+// ******** BUG: cannot use spaces inside name because it breaks modals!!!! ~~~~ may need to use images as file names so that ids of modals are unique...
+app.post("/additem", upload.single("image"), (req, res) => {
   res.locals = data;
   data.name.push(req.body.name);
   data.description.push(req.body.description);
+  data.image.push(req.file.filename);
   res.render("browse.ejs");
+  console.log(req.file.filename);
 });
 
 // Contact Us page
