@@ -7,12 +7,12 @@
     <!-- Function below will check array of items in a set of data, and create a div card for each. Will link to database when able to...
       !!PROBLEMS WITH CURRENT SOLUTION
         *This solution makes it difficult to sync up arrays with blank values. Require inputed data to require all fields? -->
-    <%for(i = 0; i< locals.data; i++) {console.log(data); var item = data[i].name; var info = data[i].description; var img = data[i].image;%>
+    <%for(i = 0; i< locals.data.length; i++) {var item = data[i].name; var info = data[i].description; var img = data[i].image;%>
     <!-- Item: variable for the name of each object/ whever it is needed
            Info: used for the description of an item
            img: Used to find which image is used for each item, ALSO FOR THE IDENTIFICATIONS OF MODALS DUE TO NO OTHER WAY TO DO THAT RIGHT NOW. -->
     <div class="col">
-      <a data-bs-toggle="modal" data-bs-target="#<%-img %>">
+      <a data-bs-toggle="modal" data-bs-target="#<%-img.substring(0,img.length-4)%>">
         <div class="card">
           <img src="img/<%= img %>" alt="example image here" />
           <div class="card-body">
@@ -23,7 +23,7 @@
       </a>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="<%- img %>" tabindex="-1" aria-labelledby="<%- img %>" aria-hidden="true">
+    <div class="modal fade" id="<%-img.substring(0,img.length-4)%>" tabindex="-1" aria-labelledby="<%-img.substring(0,img.length-4)%>" aria-hidden="true">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">

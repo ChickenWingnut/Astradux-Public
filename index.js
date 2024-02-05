@@ -8,7 +8,6 @@ const storage = multer.diskStorage({
     callback(null, "public/img");
   },
   filename: (req, file, callback) => {
-    console.log(file);
     callback(null, Date.now() + path.extname(file.originalname));
   },
 });
@@ -21,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // **** This data point loads up the data for each card
 
-const data = [];
+var data = [];
 
 app.get("/", (req, res) => {
   res.render("index.ejs");
@@ -29,8 +28,9 @@ app.get("/", (req, res) => {
 
 // Browse Page functionality
 app.get("/browse", (req, res) => {
-  res.locals = data;
-  res.render("browse.ejs");
+  // res.locals = data;
+  // console.log(data);
+  res.render("browse.ejs", {data: data});
 });
 // ******** BUG: cannot use spaces inside name because it breaks modals!!!! ~~~~ may need to use images as file names so that ids of modals are unique...
 app.post("/additem", upload.single("image"), (req, res) => {
@@ -43,6 +43,8 @@ app.post("/additem", upload.single("image"), (req, res) => {
   // partNo is used to identify the part
   const partNo = req.file.filename.substring(0, req.file.filename.length - 4);
   data.push(part);
+  console.log(data.length);
+  console.log(res.locals);
   res.render("browse.ejs");
 });
 
