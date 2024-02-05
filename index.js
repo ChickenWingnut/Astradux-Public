@@ -30,11 +30,10 @@ app.get("/", (req, res) => {
 app.get("/browse", (req, res) => {
   // res.locals = data;
   // console.log(data);
-  res.render("browse.ejs", {data: data});
+  res.render("browse.ejs", { data: data });
 });
 // ******** BUG: cannot use spaces inside name because it breaks modals!!!! ~~~~ may need to use images as file names so that ids of modals are unique...
 app.post("/additem", upload.single("image"), (req, res) => {
-  res.locals = data;
   let part = {
     name: req.body.name,
     description: req.body.description,
@@ -43,9 +42,7 @@ app.post("/additem", upload.single("image"), (req, res) => {
   // partNo is used to identify the part
   const partNo = req.file.filename.substring(0, req.file.filename.length - 4);
   data.push(part);
-  console.log(data.length);
-  console.log(res.locals);
-  res.render("browse.ejs");
+  res.render("browse.ejs", { data: data });
 });
 
 // Contact Us page
