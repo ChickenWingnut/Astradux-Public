@@ -19,7 +19,6 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // **** This data point loads up the data for each card
-
 var data = [];
 
 app.get("/", (req, res) => {
@@ -32,16 +31,21 @@ app.get("/browse", (req, res) => {
   // console.log(data);
   res.render("browse.ejs", { data: data });
 });
-// ******** BUG: cannot use spaces inside name because it breaks modals!!!! ~~~~ may need to use images as file names so that ids of modals are unique...
-app.post("/additem", upload.single("image"), (req, res) => {
+// Need to add function for validation of files
+app.post("/additem", upload.array("image", 4), (req, res) => {
+  var album = [];
+  req.files.forEach((image) => {
+    album.push(image.filename);
+  });
   let part = {
     name: req.body.name,
     description: req.body.description,
-    image: req.file.filename,
+    image: req.files[0].filename,
+    album: album,
   };
-  // partNo is used to identify the part
-  const partNo = req.file.filename.substring(0, req.file.filename.length - 4);
+  console.log(part.album);
   data.push(part);
+  console.log(`${part.name} has been submitted!`);
   res.render("browse.ejs", { data: data });
 });
 

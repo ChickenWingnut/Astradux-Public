@@ -23,8 +23,13 @@
       </a>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="part-<%-img.substring(0,img.length-4)%>" tabindex="-1" aria-labelledby="part-
-      <%-img.substring(0,img.length-4)%>" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="part-<%-img.substring(0,img.length-4)%>"
+      tabindex="-1"
+      aria-labelledby="part-
+      <%-img.substring(0,img.length-4)%>"
+      aria-hidden="true">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
@@ -33,22 +38,39 @@
           </div>
           <div class="modal-body">
             <div class="hstack">
-              <div class="col-6">
-                <img src="img/<%= img %>" alt="example img here" height="100px" width="100px" />
+              <!-- add carousel for multiple images if there are -->
+              <div class="d-flex align-items-center">
+                <div class="sm-Img col">
+                  <% locals.data[i].album.forEach((albumPic) => {%>
+                  <img class="rounded-3" src="img/<%=albumPic%>" alt="" onclick="viewImage(this)" />
+                  <%}) %>
+                </div>
+                <div class="full-Img rounded-3">
+                  <img id="Viewer" src="img/<%=img%>" alt="" height="<%= locals.data[i].album.length*100%>px" />
+                </div>
               </div>
-              <div class="col-6">
+              <div class="">
                 <h3><%- info %></h3>
               </div>
             </div>
           </div>
+          <!--Modal Body -->
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
+        <!--Modal Content -->
       </div>
+      <!-- Modal Dialog -->
     </div>
+    <!-- End of Modal -->
     <%}%>
   </div>
 </main>
-
+<script>
+  function viewImage(smallImg) {
+    var fullImg = document.getElementById("Viewer");
+    fullImg.src = smallImg.src;
+  }
+</script>
 <%- include("partials/footer.ejs") %>
