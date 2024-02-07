@@ -44,7 +44,7 @@ app.post("/additem", upload.array("image", 4), (req, res) => {
     album: album,
   };
   console.log(part.album);
-  data.push(part);
+  data.unshift(part);
   console.log(`${part.name} has been submitted!`);
   res.render("browse.ejs", { data: data });
 });

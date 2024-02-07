@@ -37,7 +37,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div class="hstack">
+            <div class="hstack d-flex justify-content-center">
               <!-- add carousel for multiple images if there are -->
               <div class="d-flex align-items-center">
                 <div class="sm-Img col">
@@ -49,9 +49,8 @@
                   <img id="Viewer" src="img/<%=img%>" alt="" height="<%= locals.data[i].album.length*100%>px" />
                 </div>
               </div>
-              <div class="">
-                <h3><%- info %></h3>
-              </div>
+
+            </div>
             </div>
           </div>
           <!--Modal Body -->
