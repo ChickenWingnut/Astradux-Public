@@ -27,8 +27,6 @@ app.get("/", (req, res) => {
 
 // Browse Page functionality
 app.get("/browse", (req, res) => {
-  // res.locals = data;
-  // console.log(data);
   res.render("browse.ejs", { data: data });
 });
 // Need to add function for validation of files

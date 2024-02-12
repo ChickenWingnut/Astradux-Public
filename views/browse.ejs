@@ -23,47 +23,41 @@
       </a>
     </div>
     <!-- Modal -->
-    <div
-      class="modal fade"
-      id="part-<%-img.substring(0,img.length-4)%>"
-      tabindex="-1"
-      aria-labelledby="part-
-      <%-img.substring(0,img.length-4)%>"
-      aria-hidden="true">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="<%- item %>"><%- item %></h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="hstack d-flex justify-content-center">
-              <!-- add carousel for multiple images if there are -->
-              <div class="d-flex align-items-center">
-                <div class="sm-Img col">
-                  <% locals.data[i].album.forEach((albumPic) => {%>
-                  <img class="rounded-3" src="img/<%=albumPic%>" alt="" onclick="viewImage(this)" />
-                  <%}) %>
-                </div>
-                <div class="full-Img rounded-3">
-                  <img id="Viewer" src="img/<%=img%>" alt="" height="<%= locals.data[i].album.length*100%>px" />
-                </div>
-              </div>
 
+    </div>
+    <%}%>
+    <%for(i = 0; i< locals.data.length; i++) {var item = data[i].name; var info = data[i].description; var img = data[i].image;%>
+      <div class="modal fade" id="part-<%-img.substring(0,img.length-4)%>" tabindex="-1" aria-labelledby="part-<%-img.substring(0,img.length-4)%>" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="<%- item %>"><%- item %></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+              <!-- <div class="hstack"> -->
+                <!-- Gallery for Image Selection -->
+                <!-- <div class="d-flex align-items-center">
+                  <div class="sm-Img col">
+
+
+                  </div>
+                  <div class="full-Img rounded-3">
+                    <img id="Viewer" src="img/<%=img%>" alt="" height="<%= locals.data[i].album.length*100%>px" />
+                  </div>
+                </div>
+  
+              </div> -->
+              <div class="gallery">
+                <% locals.data[i].album.forEach((albumPic) => {%>
+                    <img class="rounded-3 gallery-item" src="img/<%=albumPic%>" alt="" onclick="viewImage(this)" />
+                <%}) %>
+              </div>
             </div>
-          </div>
-          <!--Modal Body -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
-        <!--Modal Content -->
       </div>
-      <!-- Modal Dialog -->
-    </div>
-    <!-- End of Modal -->
-    <%}%>
+    <%}%>   
   </div>
 </main>
 <script>
