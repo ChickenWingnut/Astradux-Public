@@ -2,7 +2,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import multer from "multer";
 import path from "path";
-
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, "public/img");

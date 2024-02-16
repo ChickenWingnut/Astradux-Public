@@ -2,7 +2,7 @@ footer {
   position: absolute;
   bottom: 0;
 }
-
+/* 
 .sm-Img {
   float: left;
   padding: 10px;
@@ -20,17 +20,18 @@ footer {
 .full-Img {
   float: right;
   padding: 10px;
-}
+} */
 
 /* Test below for horizontallys crolling carousel */
 .gallery {
-  width: 500px;
+  height: 200px;
+  width: min-content;
   display: flex;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
 }
 .gallery-item {
-  height: 400px;
+  object-fit: contain;
   margin-right: 10px;
   flex-shrink: 0;
   scroll-snap-align: center;

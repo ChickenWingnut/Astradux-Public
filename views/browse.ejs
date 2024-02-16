@@ -17,7 +17,8 @@
           <img src="img/<%= img %>" alt="example image here" />
           <div class="card-body">
             <h5 class="card-title"><%= item %></h5>
-            <h6 class="card-text"><%= info %></h6>
+            <!-- info may not be displayed to just be added to modal -->
+            <!-- <h6 class="card-text"><%= info %></h6> -->
           </div>
         </div>
       </a>
@@ -32,27 +33,16 @@
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="<%- item %>"><%- item %></h1>
+              <button type="button" onclick='editDescription()'>Edit</button>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <!-- <div class="hstack"> -->
-                <!-- Gallery for Image Selection -->
-                <!-- <div class="d-flex align-items-center">
-                  <div class="sm-Img col">
-
-
-                  </div>
-                  <div class="full-Img rounded-3">
-                    <img id="Viewer" src="img/<%=img%>" alt="" height="<%= locals.data[i].album.length*100%>px" />
-                  </div>
-                </div>
-  
-              </div> -->
               <div class="gallery">
                 <% locals.data[i].album.forEach((albumPic) => {%>
                     <img class="rounded-3 gallery-item" src="img/<%=albumPic%>" alt="" onclick="viewImage(this)" />
                 <%}) %>
               </div>
+              <p id="description-<%=img.substring(0,img.length-4)%>" contenteditable="false"><%- info %></p>
             </div>
           </div>
         </div>
@@ -65,5 +55,12 @@
     var fullImg = document.getElementById("Viewer");
     fullImg.src = smallImg.src;
   }
+  // Current problem: function below breaks without an item!!
+  function editDescription() {
+    let id = 'description-<%-img.substring(0,img.length-4)%>';
+    let description = document.getElementById(id);
+    description.setAttribute("contenteditable", "true");
+  }
+
 </script>
 <%- include("partials/footer.ejs") %>
