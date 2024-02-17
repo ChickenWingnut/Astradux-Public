@@ -56,6 +56,8 @@
     fullImg.src = smallImg.src;
   }
   // Current problem: function below breaks without an item!!
+  // Instructions on how to make it work as of now:  
+  // Remove the function below, start the server, and add a new part. Then add the function back. The edit button inside each modal should make the text editable. The editable text cannot be saved currently.
   function editDescription() {
     let id = 'description-<%-img.substring(0,img.length-4)%>';
     let description = document.getElementById(id);
